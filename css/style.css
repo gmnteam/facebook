@@ -1,0 +1,7 @@
+@import url('./skeleton.css');
+@import url('./bulma.css');
+@import url('./component.css');
+
+textarea {
+  resize: none;
+}
