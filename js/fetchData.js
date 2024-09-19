@@ -32,7 +32,8 @@ function appendFileData(file) {
   const fileNameCell = createElement('div', ['cell']);
   
   const fileName = createElement('span', ['fileName', 'title', 'is-6'], file.title);  // Nama file
-  const fileDuration = createElement('span', ['fileDuration', 'subtitle', 'is-6'], `${Math.floor(file.duration_ms / 1000)} seconds`);  // Durasi
+  const fileDuration = createElement('span', ['fileDuration', 'subtitle', 'is-6'], `${Math.floor(file.duration_ms / 1000)} seconds`);
+  fileDuration.style.display = 'block';  // Durasi pasti di bawah nama
 
   // Tambahkan nama dan durasi ke cell
   fileNameCell.appendChild(fileName);
