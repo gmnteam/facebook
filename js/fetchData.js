@@ -28,14 +28,16 @@ function appendFileData(file) {
   thumb.src = file.thumbnail;
   thumbCell.appendChild(thumb);
 
-  // File Name and Duration
+  // File Name and Duration (dipisah menjadi dua elemen berbeda)
   const fileNameCell = createElement('div', ['cell']);
-  const fileName = createElement('span', ['fileName', 'title', 'is-6'], file.title);
-  const fileDuration = createElement('span', ['fileDuration', 'subtitle', 'is-6'], `${Math.floor(file.duration_ms / 1000)} seconds`);
   
-  // File name di atas, duration di bawah
-  fileNameCell.appendChild(fileName);  
-  fileNameCell.appendChild(fileDuration);  // Duration di bawah nama
+  const fileName = createElement('span', ['fileName', 'title', 'is-6'], file.title);  // Nama file
+  const fileDuration = createElement('span', ['fileDuration', 'subtitle', 'is-6'], `${Math.floor(file.duration_ms / 1000)} seconds`);  // Durasi
+
+  // Tambahkan nama dan durasi ke cell
+  fileNameCell.appendChild(fileName);
+  fileNameCell.appendChild(document.createElement('br'));  // Tambah line break agar durasi di bawah nama
+  fileNameCell.appendChild(fileDuration);  // Durasi di bawah nama
 
   // HD Button
   const hdBtnCell = createElement('div', ['cell', 'last']);
@@ -49,7 +51,7 @@ function appendFileData(file) {
   sdBtn.addEventListener('click', () => window.open(file.sd, '_blank'));
   sdBtnCell.appendChild(sdBtn);
 
-  // Append everything to row
+  // Append all elements to the row
   row.append(thumbCell, fileNameCell, hdBtnCell, sdBtnCell);
   fileResult.appendChild(row);
 }
