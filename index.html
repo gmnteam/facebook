@@ -39,11 +39,33 @@
             <div class="cell"></div>
           </div>
         </div>
-        <div id="fileResult" class=""></div>
+
+        <div id="fileResult">
+          <!-- Thumbnail -->
+          <div id="thumbnail" class="mb-2">
+            <img id="thumbImg" src="" alt="Thumbnail" width="100%">
+          </div>
+
+          <!-- Title -->
+          <div id="title" class="mb-2">
+            <h2 id="videoTitle">Video Title Here</h2>
+          </div>
+
+          <!-- Duration -->
+          <div id="duration" class="mb-2">
+            <span id="videoDuration">Duration: 00:00</span>
+          </div>
+
+          <!-- Buttons for HD/SD download -->
+          <div class="download-buttons">
+            <button id="downloadHD" class="button is-primary is-fullwidth mb-2">Download HD</button>
+            <button id="downloadSD" class="button is-info is-fullwidth">Download SD</button>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div id="footer" class="is-hidden footer">
+    <div id="footer" class="footer">
       <a href="">
         <button id="donate" class="button is-small is-dark">Saweria</button>
       </a>
