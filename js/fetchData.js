@@ -7,47 +7,51 @@ async function fetchData(url) {
     if (!response.ok) throw new Error('Network response was not ok');
     return await response.json();
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error fetching data:', error);
     throw error;
   }
 }
 
 function createElement(tag, classList = [], textContent = '') {
   const element = document.createElement(tag);
-  classList.forEach(cls => element.classList.add(cls));
-  element.textContent = textContent;
+  if (classList.length) element.classList.add(...classList);
+  if (textContent) element.textContent = textContent;
   return element;
 }
 
 function appendFileData(file) {
   const row = createElement('div', ['row']);
 
+  // Thumbnail
   const thumbCell = createElement('div', ['cell']);
   const thumb = createElement('img', ['thumb']);
   thumb.src = file.thumbnail;
   thumbCell.appendChild(thumb);
 
+  // File Name and Duration
   const fileNameCell = createElement('div', ['cell']);
   const fileName = createElement('span', ['fileName', 'title', 'is-6'], file.title);
   const fileDuration = createElement('span', ['fileDuration', 'subtitle', 'is-6'], `${Math.floor(file.duration_ms / 1000)} seconds`);
-
+  
   fileNameCell.appendChild(fileName);
-  fileNameCell.appendChild(fileDuration);  // Add file duration below the file name
+  fileNameCell.appendChild(fileDuration);  // Duration di bawah nama
 
+  // HD Button
   const hdBtnCell = createElement('div', ['cell', 'last']);
   const hdBtn = createElement('span', ['material-symbols-outlined'], 'HD');
   hdBtn.addEventListener('click', () => window.open(file.hd, '_blank'));
   hdBtnCell.appendChild(hdBtn);
 
+  // SD Button
   const sdBtnCell = createElement('div', ['cell', 'last']);
   const sdBtn = createElement('span', ['material-symbols-outlined'], 'SD');
   sdBtn.addEventListener('click', () => window.open(file.sd, '_blank'));
   sdBtnCell.appendChild(sdBtn);
 
+  // Append everything to row
   row.append(thumbCell, fileNameCell, hdBtnCell, sdBtnCell);
   fileResult.appendChild(row);
 }
-
 
 export async function getTera(url) {
   fileResult.innerHTML = "";
@@ -57,10 +61,9 @@ export async function getTera(url) {
   try {
     const data = await fetchData(url);
     const files = Array.isArray(data) ? data : [data];
-
     files.forEach(file => appendFileData(file));
 
-    // Hapus loading state
+    // Remove loading state
     footer.classList.remove('is-hidden');
     hiddenItem.classList.add('is-hidden');
   } catch (error) {
@@ -71,7 +74,7 @@ export async function getTera(url) {
     fetchBtn.disabled = false;
   }
 
-  // Tambah event listener untuk Saweria dan WhatsApp
+  // Event listeners untuk Saweria dan WhatsApp
   saweria.addEventListener('click', () => window.open('https://saweria.co/mininxd', '_blank'));
   whatsapp.addEventListener('click', () => window.open('https://whatsapp.com/channel/0029VaieVG35K3zatnIond0s', '_blank'));
 }
