@@ -33,7 +33,8 @@ function appendFileData(file) {
   const fileName = createElement('span', ['fileName', 'title', 'is-6'], file.title);
   const fileDuration = createElement('span', ['fileDuration', 'subtitle', 'is-6'], `${Math.floor(file.duration_ms / 1000)} seconds`);
   
-  fileNameCell.appendChild(fileName);
+  // File name di atas, duration di bawah
+  fileNameCell.appendChild(fileName);  
   fileNameCell.appendChild(fileDuration);  // Duration di bawah nama
 
   // HD Button
