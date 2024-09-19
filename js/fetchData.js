@@ -30,8 +30,9 @@ function appendFileData(file) {
   const fileNameCell = createElement('div', ['cell']);
   const fileName = createElement('span', ['fileName', 'title', 'is-6'], file.title);
   const fileDuration = createElement('span', ['fileDuration', 'subtitle', 'is-6'], `${Math.floor(file.duration_ms / 1000)} seconds`);
-  fileName.appendChild(fileDuration);
+
   fileNameCell.appendChild(fileName);
+  fileNameCell.appendChild(fileDuration);  // Add file duration below the file name
 
   const hdBtnCell = createElement('div', ['cell', 'last']);
   const hdBtn = createElement('span', ['material-symbols-outlined'], 'HD');
@@ -46,6 +47,7 @@ function appendFileData(file) {
   row.append(thumbCell, fileNameCell, hdBtnCell, sdBtnCell);
   fileResult.appendChild(row);
 }
+
 
 export async function getTera(url) {
   fileResult.innerHTML = "";
